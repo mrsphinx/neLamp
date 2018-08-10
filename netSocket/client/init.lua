@@ -1,5 +1,5 @@
 config = require("config")
+config.loadCFG()
 events= require("events")
 setup = require("setup")
-srv = nil
-setup.start()
+setup.init()

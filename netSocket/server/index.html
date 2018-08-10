@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Web-server</title>
+    <link rel="stylesheet" href="style.css.gz" />
+</head>
+
+<body>
+    <ul class="nav fix warning" id="topNav">
+        <li><a href="#" class="brand">Web-server</a></li>
+        <li><a href="settings.html">Settings</a></li>
+    </ul>
+    <div id="Modal" class="modal hide">
+        <div class="m-cont">
+            <span class="close" id="close_m">&times;</span>
+            <div class="m-body">
+                <p>Save settings?</p>
+            </div>
+            <div class="m-foo">
+                <button id="save_m" class="success">Yes</button>
+                <button id="close" class="danger">No</button>
+            </div>
+        </div>
+    </div>
+    <div class="cont">
+        <div class="row">
+            <div class="s12 m2 l2">
+
+            </div>
+            <div class="s12 m10 l9 ">
+                <div class="row">
+                    <div class="s12">
+                        <h3>Действия</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="s12">
+                        <h3>Server information</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>№</th>
+                                    <th>ChipID</th>
+                                    <th>FlashID</th>
+                                    <th>Heap</th>
+                                    <th>IP</th>
+                                    <th>Net mask</th>
+                                    <th>Gateway</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        <?lua return(string.format("%x",node.chipid()*256):sub(0,6):upper()) ?>
+                                    </td>
+                                    <td>
+                                        <?lua return(string.format("%x",node.flashid()*256):sub(0,6):upper()) ?>
+                                    </td>
+                                    <td>
+                                        <?lua return(node.heap()) ?>
+                                    </td>
+                                    <td>
+                                        <?lua return(srvinfo.getIP()) ?>
+                                    </td>
+                                    <td>
+                                        <?lua return(srvinfo.getNM()) ?>
+                                    </td>
+                                    <td>
+                                        <?lua return(srvinfo.getGW()) ?>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="s12">
+                        <h3>Station information</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>№</th>
+                                    <th>MAC</th>
+                                    <th>IP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?lua return(srvinfo.getStationList()) ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function send(page, data, callback) {
+            var req = new XMLHttpRequest();
+            req.open("POST", page, true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            req.addEventListener("load", function() {
+                if (req.status < 400) {
+                    callback(req.responseText);
+                } else {
+                    callback(req.status);
+                }
+            });
+            req.send(JSON.stringify(data));
+        }
+    </script>
+</body>
+
+</html>
