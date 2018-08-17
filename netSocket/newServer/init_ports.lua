@@ -5,4 +5,5 @@ return function ()
             gpio.write(s.ports[k].pin,s.ports[k].def)
         end
     end
+    adc.force_init_mode(adc.INIT_ADC)
 end

@@ -18,9 +18,8 @@ return function(m, i, p)
                 if not net_cli_init then
                     net_cli_init =  dofile("net.lua")
                     net_cli_init.init()
-                else
-                    net_cli_init.updateMAC(T.MAC,ip)
                 end
+                net_cli_init.updateMAC(T.MAC,ip)
             end
         )
     end

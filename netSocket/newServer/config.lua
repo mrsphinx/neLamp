@@ -28,9 +28,9 @@ local function def(v)
             },
             net = {net_port = 1884,state=false},
             ports = {
-                led_red_pin = {pin = 7, mode = gpio.OUTPUT, def = gpio.LOW, action = 0}, -- GPIO13
-                led_green_pin = {pin = 5, mode = gpio.OUTPUT, def = gpio.LOW, action = 1}, -- GPIO14
-                keyboard = {pin = 6, mode = gpio.INPUT} -- GPIO12
+                -- led_red_pin = {pin = 7, mode = gpio.OUTPUT, def = gpio.LOW, action = 0}, -- GPIO13
+                -- led_green_pin = {pin = 5, mode = gpio.OUTPUT, def = gpio.LOW, action = 1}, -- GPIO14
+                -- keyboard = {pin = 6, mode = gpio.INPUT} -- GPIO12
             }
         }
         write_to_file(s, "settings.json")

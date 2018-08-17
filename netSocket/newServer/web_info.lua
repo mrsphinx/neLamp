@@ -1,4 +1,4 @@
-local module={}
+local module = {}
 
 function module.getIP()
     local ip, nm, gw = wifi.ap.getip()
@@ -17,16 +17,20 @@ end
 
 function module.getStationList()
     local html = ""
-    local count=1;
+    local count = 1
     if net_cli_init then
-        for mac,v in pairs(net_cli_init.mac)do
+        for mac, v in pairs(net_cli_init.mac) do
             html = html .. "<tr>"
-            html = html .. "<td>".. count .."</td>"
-            html = html .. "<td>".. tostring(mac):upper() .."</td>"
-            html = html .. "<td>".. v.ip .."</td>"
-            html = html .. "<td>".. v.state .."</td>"
+            html = html .. "<td>" .. count .. "</td>"
+            html = html .. "<td>" .. tostring(mac):upper() .. "</td>"
+            html = html .. "<td>" .. v.IP .. "</td>"
+            if v.state == true then
+                html = html .. "<td>ON</td>"
+            else
+                html = html .. "<td>OFF</td>"
+            end
             html = html .. "</tr>"
-            count=count+1
+            count = count + 1
         end
     end
     return html
